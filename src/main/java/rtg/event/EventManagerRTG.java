@@ -4,11 +4,9 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.*;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.apache.logging.log4j.Level;
 import rtg.RTG;
 import rtg.config.rtg.ConfigRTG;
 import rtg.util.Logger;
@@ -21,6 +19,7 @@ import rtg.world.gen.genlayer.RiverRemover;
 import rtg.world.gen.structure.MapGenScatteredFeatureRTG;
 import rtg.world.gen.structure.MapGenVillageRTG;
 import rtg.world.gen.structure.StructureOceanMonumentRTG;
+import rtg.world.gen.structure.StructureVillagePiecesRTG;
 
 public class EventManagerRTG
 {
@@ -31,6 +30,7 @@ public class EventManagerRTG
     {
         MapGenStructureIO.registerStructure(MapGenScatteredFeatureRTG.Start.class, "rtg_MapGenScatteredFeatureRTG");
         MapGenStructureIO.registerStructure(MapGenVillageRTG.Start.class, "rtg_MapGenVillageRTG");
+        StructureVillagePiecesRTG.registerVillagePieces();
         MapGenStructureIO.registerStructure(StructureOceanMonumentRTG.StartMonument.class, "rtg_MapGenOceanMonumentRTG");
     }
     

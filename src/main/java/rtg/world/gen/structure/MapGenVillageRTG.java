@@ -7,9 +7,9 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.minecraft.world.gen.structure.StructureVillagePieces.Road;
 import rtg.api.biome.BiomeConfig;
 import rtg.config.rtg.ConfigRTG;
+import rtg.util.Logger;
 import rtg.world.WorldTypeRTG;
 import rtg.world.biome.WorldChunkManagerRTG;
 import rtg.world.biome.realistic.RealisticBiomeBase;
@@ -67,8 +67,8 @@ public class MapGenVillageRTG extends MapGenVillage
     @Override
     protected boolean canSpawnStructureAtCoords(int par1, int par2)
     {
-        boolean booRTGWorld = (worldObj.getWorldInfo().getTerrainType() instanceof WorldTypeRTG) ? true : false;
-        boolean booRTGChunkManager = (worldObj.getWorldChunkManager() instanceof WorldChunkManagerRTG) ? true : false;
+        boolean booRTGWorld = (worldObj.getWorldInfo().getTerrainType() instanceof WorldTypeRTG);
+        boolean booRTGChunkManager = (worldObj.getWorldChunkManager() instanceof WorldChunkManagerRTG);
         boolean canSpawnVillage = false;
         
         int k = par1;
@@ -130,8 +130,8 @@ public class MapGenVillageRTG extends MapGenVillage
     	public Start(World p_i2092_1_, Random p_i2092_2_, int p_i2092_3_, int p_i2092_4_, int p_i2092_5_)
     	{
     		super(p_i2092_3_, p_i2092_4_);
-    		List list = StructureVillagePieces.getStructureVillageWeightedPieceList(p_i2092_2_, p_i2092_5_);
-    		StructureVillagePieces.Start start = new StructureVillagePieces.Start(p_i2092_1_.getWorldChunkManager(), 0, p_i2092_2_, (p_i2092_3_ << 4) + 2, (p_i2092_4_ << 4) + 2, list, p_i2092_5_);
+    		List list = StructureVillagePiecesRTG.getStructureVillageWeightedPieceList(p_i2092_2_, p_i2092_5_);
+    		StructureVillagePiecesRTG.Start start = new StructureVillagePiecesRTG.Start(p_i2092_1_.getWorldChunkManager(), 0, p_i2092_2_, (p_i2092_3_ << 4) + 2, (p_i2092_4_ << 4) + 2, list, p_i2092_5_);
     		this.components.add(start);
     		start.buildComponent(start, this.components, p_i2092_2_);
     		List list1 = start.field_74930_j;
@@ -164,14 +164,15 @@ public class MapGenVillageRTG extends MapGenVillage
     		{
     			StructureComponent structurecomponent1 = (StructureComponent)iterator.next();
 
-    			if (!(structurecomponent1 instanceof Road))
+    			if (!(structurecomponent1 instanceof StructureVillagePieces.Road))
     			{
     				++l;
     			}
     		}
 
     		this.hasMoreThanTwoComponents = l > 2;
-    	}
+            Logger.debug("Generated village at %s %s", p_i2092_3_, p_i2092_4_);
+        }
 
     	/**
     	 * currently only defined for Villages, returns true if Village has more than 2 non-road components
