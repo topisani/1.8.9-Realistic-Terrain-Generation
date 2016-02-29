@@ -168,27 +168,6 @@ public class EventManagerRTG
             Logger.info("World Seed: %d", event.world.getSeed());
         }
     }
-
-    @SubscribeEvent
-    public void onGetVillageBlockID(BiomeEvent.GetVillageBlockID event)
-    {
-        RealisticBiomeBase biomeReal;
-        if (event.biome instanceof RealisticBiomeBase) {
-            biomeReal = (RealisticBiomeBase) event.biome;
-        }
-        else if (event.biome == null && this.biome != null) {
-            biomeReal = this.biome;
-        }
-        else {
-            return;
-        }
-        event.replacement = biomeReal.config.villageMaterial.replace(event.original);
-
-        // The event has to be cancelled in order to override the original block.
-        if (event.replacement != null) {
-            event.setResult(Result.DENY);
-        }
-    }
     
     @SubscribeEvent
     public void preBiomeDecorate(DecorateBiomeEvent.Pre event)
